@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-itim: "Itim", cursive;
+  --color-primary-50: #E6F0FF;
+  --color-primary-100: #CCE0FF;
+  --color-primary-200: #99C2FF;
+  --color-primary-300: #66A3FF;
+  --color-primary-400: #3375E6;
+  --color-primary-500: #0047B3;
+  --color-primary-600: #003D99;
+  --color-primary-700: #003080;
+  --color-primary-800: #001A4D;
+  --color-primary-900: #001A4D;
+  --color-primary-950: #001033;
+  --color-error-bg: #FEE2E2;
+  --color-error-border: #EF4444;
+  --color-error-text: #B91C1C;
+  --color-hv-error-bg: #FECACA;
+  --color-hv-error-border: #DC2626;
+  --color-hv-error-text: #991B1B;
+  --color-at-error-bg: #FCA5A5;
+  --color-at-error-border: #B91C1C;
+  --color-at-error-text: #7F1D1D;
+  --color-edit-bg: #FEF3C7;
+  --color-edit-border: #F59E0B;
+  --color-edit-text: #92400E;
+  --color-hv-edit-bg: #FDE68A;
+  --color-hv-edit-border: #D97706;
+  --color-hv-edit-text: #78350F;
+  --color-at-edit-bg: #CCDD33;
+  --color-at-edit-border: #B45309;
+  --color-at-edit-text: #451A03;
+  --color-disable-bg: #6B7280;
+  --color-disable-border: #9CA3AF;
+  --color-disable-text: #F3F4F6;
+  --color-hv-disable-bg: #F3F4F6;
+  --color-hv-disable-border: #9CA3AF;
+  --color-hv-disable-text: #6B7280;
+  --color-success-bg: #DCFCE7;
+  --color-success-border: #22C55E;
+  --color-success-text: #166534;
+  --color-hv-success-bg: #BBF7D0;
+  --color-hv-success-border: #16A34A;
+  --color-hv-success-text: #14532D
+  --color-at-success-bg: #86EFAC;
+  --color-at-success-border: #15803D;
+  --color-at-success-text: #052E16;
+  --color-wait-bg: #DBEAFE;
+  --color-wait-border: #3B82F6;
+  --color-wait-text: #1E40AF;
+  --color-hv-wait-bg: #BFDBFE;
+  --color-hv-wait-border: #2563EB;
+  --color-hv-wait-text: #1E3A8A;
+  --color-at-wait-bg: #93C5FD;
+  --color-at-wait-border: #1D4ED8;
+  --color-at-wait-text: #172554;
+}
+
+@layer base {
+  html, body, #root { height: 100%; }
+  body { margin: 0; }
+  body {
+    @apply font-itim bg-primary-50 text-primary-950;
+  }
+}
