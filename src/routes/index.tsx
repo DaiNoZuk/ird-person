@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import PageLayout from "../layout/PageLayout";
 import Person from "../pages/Person";
+import CreatePerson from "../pages/CreatePerson";
 
 
 export const router = createBrowserRouter([
@@ -12,7 +13,8 @@ export const router = createBrowserRouter([
     element: <PageLayout />,
     children: [
       { index: true, element: <Home /> },
-      { path: "person/:id", element: <Person /> }
+      { path: "person/:id", element: <Person /> },
+      { path: "create-person", element: <CreatePerson />}
     ],
   },
   {

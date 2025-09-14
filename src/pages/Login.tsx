@@ -1,18 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { image } from "../assets/images";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../stores/auth";
 
 function Login() {
+  const { login, user } = useAuthStore();
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //   const [remember, setRemember] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   // errors
   const [emailError, setEmailError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    } else {
+      return;
+    }
+  }, [user]);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -41,26 +52,23 @@ function Login() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateEmail() && !validatePassword()) return;
-
-    // TODO: เรียก API login จริงที่นี่
-    // await new Promise((r) => setTimeout(r, 700));
-    console.log("Logging in:", { email, password });
-
-    // จำค่าไว้หากติ๊ก Remember Me
-    //   if (remember) {
-    //     localStorage.setItem(LS_KEYS.remember, "true");
-    //     localStorage.setItem(LS_KEYS.email, email.trim());
-    //     localStorage.setItem(LS_KEYS.password, encode(password));
-    //   } else {
-    //     localStorage.setItem(LS_KEYS.remember, "false");
-    //     localStorage.removeItem(LS_KEYS.email);
-    //     localStorage.removeItem(LS_KEYS.password);
-    //   }
-
-    // TODO: navigate ไปหน้า Home
-    navigate("/");
-    //   console.log("Logged in:", { email, remember });
+    const isValid = validateEmail() && validatePassword();
+    if (isValid) {
+      await new Promise((r) => setTimeout(r, 600)); // จำลอง API
+      login({
+        user: {
+          id: "u_1",
+          email,
+          name: "นายศุภณัฐ เหลี่ยมเลิศ",
+          role: "admin",
+        },
+        accessToken: "ACCESS_TOKEN_SAMPLE",
+        remember,
+      });
+      navigate("/");
+    } else {
+      alert("กรุณากรอกข้อมูลให้ถูกต้องครบถ้วน");
+    }
   };
 
   return (
@@ -119,7 +127,11 @@ function Login() {
           )}
         </div>
         <div className="flex justify-start w-full gap-2 items-center">
-          <input type="checkbox" className="w-6 h-6 accent-primary-600" />
+          <input
+            type="checkbox"
+            className="w-6 h-6 accent-primary-600"
+            onClick={() => setRemember(!remember)}
+          />
           <p>Remember Me</p>
         </div>
         <button
