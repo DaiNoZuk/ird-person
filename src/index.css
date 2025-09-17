@@ -43,7 +43,7 @@
   --color-success-text: #166534;
   --color-hv-success-bg: #BBF7D0;
   --color-hv-success-border: #16A34A;
-  --color-hv-success-text: #14532D
+  --color-hv-success-text: #14532D;
   --color-at-success-bg: #86EFAC;
   --color-at-success-border: #15803D;
   --color-at-success-text: #052E16;
@@ -65,3 +65,10 @@
     @apply font-itim bg-primary-50 text-primary-950;
   }
 }
+
+.scrollbar {
+  -ms-overflow-style: none;     
+  scrollbar-width: none; 
+}  
+
+.scrollbar::-webkit-scrollbar { display: none; }

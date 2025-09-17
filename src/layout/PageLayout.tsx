@@ -36,7 +36,7 @@ function PageLayout() {
 
   return (
     <div className="min-h-screen w-screen bg-primary-50 max-w-full">
-      <header className="fixed top-0 inset-x-0 h-16 bg-primary-400 flex justify-between items-center px-4">
+      <header className="fixed top-0 inset-x-0 h-16 bg-primary-400 flex justify-between items-center px-4 z-50">
         <div className="flex items-center gap-3">
           <img
             className="w-16 h-14 object-contain"

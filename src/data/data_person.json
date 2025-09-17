@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "frist_name": "",
+    "last_name": "",
+    "image_url": "",
+    "affiliation": "",
+    "expertise_main": [],
+    "expertise_second": [],
+    "retired": false,
+    "contact": {
+      "email": "",
+      "phone": [],
+      "address": ""
+    },
+    "bank": {
+      "bank_name": "",
+      "bank_logo_url": "",
+      "bank_number": ""
+    },
+    "history": [],
+    "characteristic": [],
+    "note": ""
+  }
+]

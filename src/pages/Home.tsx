@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
-import CustomDropDown from "../components/CustomDropDown";
+import DialogSearch from "../components/DialogSearch";
 import { image } from "../assets/images";
 import { PiNewspaperClipping } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,21 @@ function Home() {
     { value: "", label: "-- สังกัด --" },
     { value: "a", label: "lorem10" },
     { value: "b", label: "b" },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
+    { value: "a", label: "Lorem ipsum dolor sit amet sit sit." },
   ];
 
   const expertiseData = [
@@ -52,15 +67,15 @@ function Home() {
             </button>
           </div>
           <div className="relative w-60">
-            <CustomDropDown
-              options={options}
+            <DialogSearch
+              dataValues={options}
               value={affiliation}
               onChange={(value) => setAffiliation(value)}
             />
           </div>
           <div className="w-60">
-            <CustomDropDown
-              options={expertiseData}
+            <DialogSearch
+              dataValues={expertiseData}
               value={expertise}
               onChange={(value) => setExpertise(value)}
             />
