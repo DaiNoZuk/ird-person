@@ -7,7 +7,8 @@ interface propDropDown {
   value: string;
   onChange: (value: string) => void;
   defaultValue: string;
-  placeholderInput: string;
+  searchData?: boolean;
+  placeholderInput?: string;
   lable: string;
 }
 
@@ -21,8 +22,9 @@ function CustomDropDown({
   value,
   onChange,
   defaultValue,
-  placeholderInput,
+  placeholderInput = "",
   lable,
+  searchData = true,
 }: propDropDown) {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -81,27 +83,34 @@ function CustomDropDown({
                   <IoIosCloseCircleOutline className="w-8 h-8" />
                 </button>
               </div>
-              <div className="flex justify-between items-center mt-2 gap-6">
-                <div className="relative w-1/2">
-                  <input
-                    type="text"
-                    className="py-2 px-2 rounded-lg w-full pr-10 bg-primary-100 outline-1 outline-primary-600 focus:outline-2 focus:outline-primary-600 focus:bg-primary-200"
-                    placeholder={placeholderInput}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        searchPerson(); 
-                      }
-                    }}
-                  />
-                  <button
-                    type="button"
-                    onClick={searchPerson}
-                    className="absolute right-0 top-5 -translate-y-1/2 text-primary-50 focus:outline-none py-2 px-2 bg-primary-600 rounded-lg cursor-pointer hover:bg-primary-500 border-none"
-                  >
-                    <IoSearchSharp className="w-6 h-6" />
-                  </button>
-                </div>
+              <div
+                className={`flex ${
+                  searchData ? "justify-between" : "justify-end"
+                } items-center mt-2 gap-6`}
+              >
+                {searchData ? (
+                  <div className="relative w-1/2">
+                    <input
+                      type="text"
+                      className="py-2 px-2 rounded-lg w-full pr-10 bg-primary-100 outline-1 outline-primary-600 focus:outline-2 focus:outline-primary-600 focus:bg-primary-200"
+                      placeholder={placeholderInput}
+                      onChange={(e) => setSearchValue(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          searchPerson();
+                        }
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={searchPerson}
+                      className="absolute right-0 top-5 -translate-y-1/2 text-primary-50 focus:outline-none py-2 px-2 bg-primary-600 rounded-lg cursor-pointer hover:bg-primary-500 border-none"
+                    >
+                      <IoSearchSharp className="w-6 h-6" />
+                    </button>
+                  </div>
+                ) : null}
+
                 <button
                   onClick={() => {
                     onChange(selectedValue);
@@ -112,14 +121,17 @@ function CustomDropDown({
                   บันทึก
                 </button>
               </div>
-              {selectedValue != "" ? (
+              {selectedValue != "" && searchData ? (
                 <button
                   className={`
                    mt-2 flex justify-start gap-2 items-center
                   `}
                 >
                   <p>สังกัดที่เลือก : {selectedValue}</p>
-                  <IoMdCloseCircle className="w-5 h-5 cursor-pointer" onClick={()=>setSelectedValue("")}/>
+                  <IoMdCloseCircle
+                    className="w-5 h-5 cursor-pointer"
+                    onClick={() => setSelectedValue("")}
+                  />
                 </button>
               ) : null}
             </div>

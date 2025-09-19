@@ -1,9 +1,11 @@
-import React from 'react'
+import ComingSoon from "../components/ComingSoon";
 
 function Affiliation() {
   return (
-    <div>Affiliation</div>
-  )
+      <div className="">
+      <ComingSoon />
+    </div>
+  );
 }
 
-export default Affiliation
+export default Affiliation;

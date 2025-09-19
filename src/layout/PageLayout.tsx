@@ -14,7 +14,6 @@ function PageLayout() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  console.log(location.pathname);
   const pageMenu = [
     {
       path: "/",

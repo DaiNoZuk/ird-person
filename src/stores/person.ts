@@ -235,6 +235,7 @@ export const usePersonStore = create<PersonStore>()(
       {
         name: "person-store",
         storage: createJSONStorage(() => localStorage),
+        // storage: createJSONStorage(() => localStorage),
       }
     )
   )

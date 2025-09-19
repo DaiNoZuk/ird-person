@@ -22,7 +22,7 @@ function DialogInsertExpertise({
   placeholderInput,
   lable,
 }: propDropDown) {
-  const {expertise} = useExpertiseStore();
+  const { expertise } = useExpertiseStore();
 
   const [open, setOpen] = useState(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);

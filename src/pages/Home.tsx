@@ -23,6 +23,13 @@ function Home() {
   const [selectedExpertise, setSelectedExpertise] = useState("");
   const [dataPerson, setDataPerson] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [retired, setRetired] = useState<string>("");
+
+  const retireSelectData = [
+    { id: 1, name: "ทั้งหมด" },
+    { id: 2, name: "เกษียณ" },
+    { id: 3, name: "ยังไม่เกษียณ" },
+  ];
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,12 +37,20 @@ function Home() {
       setIsLoading(false);
       filterPerson();
     }, 300);
-  }, [person, selectedAffiliation, selectedExpertise]);
+  }, [person, selectedAffiliation, selectedExpertise, retired]);
 
   const filterPerson = () => {
     const textSearch = (search || "").trim().toLowerCase();
 
-    if (!textSearch && !selectedAffiliation && !selectedExpertise) {
+    const retiredSelected: boolean | null =
+      retired === "ทั้งหมด"||retired === "" ? null : retired === "เกษียณ";
+
+    if (
+      !textSearch &&
+      !selectedAffiliation &&
+      !selectedExpertise &&
+      retiredSelected === null
+    ) {
       setDataPerson(person);
       return;
     }
@@ -46,11 +61,6 @@ function Home() {
       const fullName = `${firstName} ${lastName}`.trim();
       const affiliation = (p.affiliation || "").toLowerCase();
       const expertise = Array.isArray(p.expertise_main) ? p.expertise_main : [];
-      let matchAffiliation = true;
-
-      const matchRetired = person.filter(
-        (e) => e.retired == ("เกษียณ" == selectedAffiliation)
-      );
 
       const matchSearch =
         !textSearch ||
@@ -58,18 +68,14 @@ function Home() {
         lastName.startsWith(textSearch) ||
         fullName.includes(textSearch);
 
-      if (selectedAffiliation) {
-        if (selectedAffiliation === "เกษียณ") {
-          matchAffiliation = p.retired === true;
-        } else {
-          matchAffiliation = selectedAffiliation === affiliation;
-        }
-      }
-      const matchExpertise =
-        !selectedExpertise ||
-        expertise.some((x) => (x || "").toLowerCase() === selectedExpertise);
+      const matchAffiliation = !selectedAffiliation || affiliation === selectedAffiliation;
 
-      return matchSearch && matchAffiliation && matchExpertise && matchRetired;
+      const matchExpertise = !selectedExpertise || expertise.includes(selectedExpertise);
+
+      const matchRetired =
+        retiredSelected === null || p.retired === retiredSelected;
+
+      return matchSearch && matchAffiliation && matchExpertise &&matchRetired;
     });
 
     setDataPerson(filterData);
@@ -79,7 +85,7 @@ function Home() {
     <div className="px-6 w-full">
       <>
         <div className="flex justify-between items-center">
-          <div className="flex gap-4">
+          <div className="flex gap-4 ">
             <div className="relative w-96">
               <input
                 type="text"
@@ -132,10 +138,20 @@ function Home() {
                 lable="เลือกความชำนาญ"
               />
             </div>
+            <div className="w-60">
+              <DialogSearch
+                dataValues={retireSelectData}
+                value={retired}
+                onChange={(value) => setRetired(value)}
+                defaultValue="--เกษียณอายุ--"
+                searchData={false}
+                lable="เลือกเกษียณอายุ"
+              />
+            </div>
           </div>
           <button
             onClick={() => navigate("create-person")}
-            className="rounded-lg outline bg-success-bg outline-success-border text-success-text px-4 py-2 hover:bg-hv-success-bg hover:border-hv-success-border cursor-pointer"
+            className="rounded-lg outline bg-success-bg outline-success-border text-success-text px-4 py-2 hover:bg-hv-success-bg hover:border-hv-success-border cursor-pointer "
           >
             <FaPlus className="inline mr-2" />
             <span>ผู้ทรงคุณวุฒิ</span>

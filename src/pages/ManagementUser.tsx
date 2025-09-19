@@ -1,9 +1,11 @@
-import React from 'react'
+import ComingSoon from "../components/ComingSoon";
 
 function ManagementUser() {
   return (
-    <div>Management User</div>
-  )
+    <div className="">
+      <ComingSoon />
+    </div>
+  );
 }
 
-export default ManagementUser
+export default ManagementUser;

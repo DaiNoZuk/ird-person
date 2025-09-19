@@ -1,9 +1,11 @@
-import React from 'react'
+import ComingSoon from "../components/ComingSoon";
 
 function ReportApp() {
   return (
-    <div>ReportApp</div>
-  )
+    <div className="">
+      <ComingSoon />
+    </div>
+  );
 }
 
-export default ReportApp
+export default ReportApp;

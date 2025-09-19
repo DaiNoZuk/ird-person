@@ -1,9 +1,11 @@
-import React from 'react'
+import ComingSoon from "../components/ComingSoon";
 
 function Expertise() {
   return (
-    <div>Expertise</div>
-  )
+    <div>
+      <ComingSoon />
+    </div>
+  );
 }
 
-export default Expertise
+export default Expertise;
