@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
+import { FaPlus } from "react-icons/fa";
 import { IoIosCloseCircleOutline, IoMdCloseCircle } from "react-icons/io";
-import { IoChevronDown, IoChevronUp, IoSearchSharp } from "react-icons/io5";
+import { IoSearchSharp } from "react-icons/io5";
+import { useAffiliationStore } from "../stores/affiliation";
 
-interface propDropDown {
-  dataValues: DataValue[];
-  value: string;
+interface propDialog {
   onChange: (value: string) => void;
-  defaultValue: string;
   placeholderInput: string;
   lable: string;
 }
@@ -16,14 +15,13 @@ interface DataValue {
   name: string;
 }
 
-function CustomDropDown({
-  dataValues,
-  value,
+function DialogInsertAffiliation({
   onChange,
-  defaultValue,
   placeholderInput,
   lable,
-}: propDropDown) {
+}: propDialog) {
+  const {affiliation} = useAffiliationStore();
+
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -31,34 +29,27 @@ function CustomDropDown({
 
   const searchPerson = () => {
     if (!searchValue) {
-      setData(dataValues);
+      setData(affiliation); // ถ้าไม่มีการค้นหา แสดงทั้งหมด
     } else {
-      const filterData = dataValues.filter((item) =>
+      const filterData = affiliation.filter((item) =>
         item.name.toLowerCase().startsWith(searchValue.toLowerCase())
       );
       setData(filterData);
     }
   };
+  
   useEffect(() => {
-    setData(dataValues);
+    setData(affiliation);
   }, []);
 
   return (
-    <div className="w-60">
+    <>
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="bg-primary-100 border border-primary-600 rounded-lg px-3 py-2 w-full flex justify-between items-center"
+        className="w-6 h-6 bg-primary-100 rounded-md border border-primary-600 items-center justify-center flex cursor-pointer hover:bg-primary-400 transition-colors"
       >
-        <span className="truncate">
-          {dataValues.find((option) => option.name === value)?.name ??
-            defaultValue}
-        </span>
-        {open ? (
-          <IoChevronUp className="text-primary-600" />
-        ) : (
-          <IoChevronDown className="text-primary-600" />
-        )}
+        <FaPlus />
       </button>
       {open && (
         <div className="fixed inset-0 z-50">
@@ -90,7 +81,7 @@ function CustomDropDown({
                     onChange={(e) => setSearchValue(e.target.value)}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
-                        searchPerson(); 
+                        searchPerson(); // กด Enter ค้นหา
                       }
                     }}
                   />
@@ -115,11 +106,14 @@ function CustomDropDown({
               {selectedValue != "" ? (
                 <button
                   className={`
-                   mt-2 flex justify-start gap-2 items-center
-                  `}
+                    mt-2 flex justify-start gap-2 items-center
+                   `}
                 >
                   <p>สังกัดที่เลือก : {selectedValue}</p>
-                  <IoMdCloseCircle className="w-5 h-5 cursor-pointer" onClick={()=>setSelectedValue("")}/>
+                  <IoMdCloseCircle
+                    className="w-5 h-5 cursor-pointer"
+                    onClick={() => setSelectedValue("")}
+                  />
                 </button>
               ) : null}
             </div>
@@ -144,8 +138,8 @@ function CustomDropDown({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
-export default CustomDropDown;
+export default DialogInsertAffiliation;

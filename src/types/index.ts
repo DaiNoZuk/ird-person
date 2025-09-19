@@ -15,7 +15,8 @@ export type LoginPayload = {
 
 export interface Person {
   id: number
-  frist_name: string
+  perfix_name: string
+  first_name: string
   last_name: string
   image_url: string
   affiliation: string
@@ -27,6 +28,10 @@ export interface Person {
   history: string[]
   characteristic: string[]
   note: string
+  created_date: string
+  updated_date: string
+  created_by: string
+  updated_by: string
 }
 
 export interface Contact {
@@ -39,4 +44,14 @@ export interface Bank {
   bank_name: string
   bank_logo_url: string
   bank_number: string
+}
+
+export interface Affiliation{
+  id:number,
+  name:string
+}
+
+export interface Expertise{
+  id:number,
+  name:string
 }

@@ -37,8 +37,10 @@ export const useAuthStore = create<AuthStore>()(
       }),
       {
         name: "auth-storage",
+        // เก็บลง storage 
         storage: createJSONStorage(() => localStorage),
-        // เก็บเฉพาะของที่จำเป็น
+        // เก็บไว้เมื่อปิด browser แล้วจะรีใหม่
+        // storage: createJSONStorage(() => sessionStorage),
         partialize: (state) => ({
           user: state.user,
           remember: state.remember,
@@ -48,3 +50,6 @@ export const useAuthStore = create<AuthStore>()(
     )
   )
 );
+
+// เคลียร์ storage ทุกครั้งที่เปิดใหม่
+localStorage.removeItem("auth-storage");
